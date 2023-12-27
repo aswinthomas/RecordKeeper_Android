@@ -25,6 +25,8 @@ class RunningFragment : Fragment() {
         setupClickListeners()
     }
 
+
+
     private fun setupClickListeners() {
         binding.container5km.setOnClickListener { launchRunningRecordScreen("5km") }
         binding.container10km.setOnClickListener { launchRunningRecordScreen("10km") }

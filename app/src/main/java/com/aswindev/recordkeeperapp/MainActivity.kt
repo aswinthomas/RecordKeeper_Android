@@ -1,11 +1,10 @@
 package com.aswindev.recordkeeperapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.aswindev.recordkeeperapp.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
