@@ -4,4 +4,13 @@
     <string name="cycling">Cycling</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="running_image_description">Running Image</string>
+    <string name="marathon_heading">Marathon</string>
+    <string name="five_km_heading">5km</string>
+    <string name="ten_km_heading">10km</string>
+    <string name="half_marathon_heading">Half Marathon</string>
+    <string name="cycling_image_description">Cycling Image</string>
+    <string name="text_longest_ride">Longest Ride</string>
+    <string name="text_biggest_climb">Biggest Climb</string>
+    <string name="text_best_average_speed">Best Average Speed</string>
 </resources>
