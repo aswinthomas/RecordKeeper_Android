@@ -1,9 +1,12 @@
 package com.aswindev.recordkeeperapp
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.aswindev.recordkeeperapp.databinding.ActivityMainBinding
@@ -18,7 +21,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         setContentView(binding.root)
         setupActionBar()
         binding.bottomNav.setOnItemSelectedListener(this)
-
+        onBackPressedDispatcher.addCallback {
+            showExitDialog()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -74,6 +79,22 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         R.id.nav_cycling -> onCyclingClicked()
         R.id.nav_running -> onRunningClicked()
         else -> false
+    }
+
+    private fun showExitDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Warning!")
+            .setMessage("Are you sure you want to quit?")
+            .setPositiveButton("Yes") { _, _ -> finish() }
+            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+            .setNeutralButton("More Info") { _, _ ->
+                Toast.makeText(
+                    this,
+                    "Not much info here",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            .show()
     }
 }
 
