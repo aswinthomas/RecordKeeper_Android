@@ -32,5 +32,5 @@ class EditCyclingRecordActivity : AppCompatActivity() {
         }
     }
 
-     onBackPressedDispatcher.addCallback(this, callback)
+     //onBackPressedDispatcher.addCallback(this, callback)
 }

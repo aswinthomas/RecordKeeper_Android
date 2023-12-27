@@ -18,8 +18,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_cycling"
             android:layout_width="match_parent"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:title="Initial Title" />
     </com.google.android.material.appbar.AppBarLayout>
 

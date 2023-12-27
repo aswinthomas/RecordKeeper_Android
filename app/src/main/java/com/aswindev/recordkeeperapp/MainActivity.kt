@@ -2,8 +2,10 @@ package com.aswindev.recordkeeperapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.commit
 import com.aswindev.recordkeeperapp.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationBarView
@@ -15,34 +17,65 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setupActionBar()
         binding.bottomNav.setOnItemSelectedListener(this)
+
     }
 
-    private fun onRunningClicked() {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.reset_running -> {
+            Toast.makeText(this, "Clicked the Reset Running", Toast.LENGTH_LONG).show()
+            true
+        }
+
+        R.id.reset_cycling -> {
+            Toast.makeText(this, "Clicked the Reset Cycling", Toast.LENGTH_LONG).show()
+            true
+        }
+
+        R.id.reset_all -> {
+            Toast.makeText(this, "Clicked the Reset All", Toast.LENGTH_LONG).show()
+            true
+        }
+
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+
+    }
+
+    private fun setupActionBar() {
+        setSupportActionBar(binding.mainToolbarRunning)
+        supportActionBar?.title = getString(R.string.app_name)
+    }
+
+    // return true to make onNavigationItemSelected concise
+    private fun onRunningClicked(): Boolean {
         supportFragmentManager.commit {
             // cant use binding here since ID is needed
             replace(R.id.frame_content, RunningFragment())
         }
+        return true
     }
 
-    private fun onCyclingClicked() {
+    private fun onCyclingClicked(): Boolean {
         supportFragmentManager.commit {
             // cant use binding here since ID is needed
             replace(R.id.frame_content, CyclingFragment())
         }
+        return true
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.nav_cycling) {
-            onCyclingClicked()
-            return true
-        } else if (item.itemId == R.id.nav_running) {
-            onRunningClicked()
-            return true
-        }
-        return false
+    override fun onNavigationItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.nav_cycling -> onCyclingClicked()
+        R.id.nav_running -> onRunningClicked()
+        else -> false
     }
-
 }
+
 

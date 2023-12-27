@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".EditRunningRecordActivity">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/running_app_bar_layout"
         android:layout_width="match_parent"
