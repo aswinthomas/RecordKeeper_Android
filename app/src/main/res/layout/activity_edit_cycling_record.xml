@@ -7,7 +7,7 @@
     tools:context=".EditRunningRecordActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/running_app_bar_layout"
+        android:id="@+id/cycling_app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_running"
+            android:id="@+id/toolbar_cycling"
             android:layout_width="match_parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:layout_height="?attr/actionBarSize"
@@ -26,8 +26,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is where we will add Edit running record"
+        android:text="This is where we will add Edit Cycling record"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/running_app_bar_layout" />
+        app:layout_constraintTop_toBottomOf="@id/cycling_app_bar_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,9 +13,13 @@
         android:theme="@style/Theme.RecordKeeperApp"
         tools:targetApi="31">
         <activity
-            android:name=".EditRunningRecordActivity"
+            android:name=".EditCyclingRecordActivity"
             android:parentActivityName=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".EditRunningRecordActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
