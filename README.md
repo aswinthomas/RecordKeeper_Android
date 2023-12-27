@@ -9,9 +9,14 @@ This App shows the following concepts:
 - OnBackPressedDispatcher
 - AlertDialog
 
+<p float="left">
+  <img src="run.png" width="280" />
+  <img src="cycle.png" width="280" /> 
+  <img src="10km.png" width="280" />
+</p>
 
-<img src="run.png" alt="image" width="50%" height="auto">
-![Run](run.png)
-![Cycle](cycle.png)
-![10km](10km.png)
-![Climb](climb.png)
+<p float="left">
+  <img src="climb.png" width="280" />
+  <img src="reset.png" width="280" /> 
+  <img src="exit.png" width="280" />
+</p>
