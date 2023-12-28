@@ -10,6 +10,7 @@ This App shows the following concepts:
 - OnBackPressedDispatcher
 - AlertDialog
 - SharedPreferences
+- Snackbar
 
 <p float="left">
   <img src="run.png" width="270" />
@@ -23,4 +24,7 @@ This App shows the following concepts:
   <img src="clearall.png" width="270" />
 </p>
 
-<img src="exit.png" width="270" />
+<p float="left">
+    <img src="snackbar.png" width="270" />
+    <img src="exit.png" width="270" />
+</p>

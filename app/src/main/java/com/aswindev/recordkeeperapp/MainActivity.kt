@@ -14,6 +14,7 @@ import com.aswindev.recordkeeperapp.cycling.CyclingFragment
 import com.aswindev.recordkeeperapp.databinding.ActivityMainBinding
 import com.aswindev.recordkeeperapp.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
@@ -71,6 +72,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                     }
                     else -> getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }
                 }
+                val snackbar = Snackbar.make(binding.frameContent, "Records cleared successfully!",Snackbar.LENGTH_LONG)
+                snackbar.anchorView = binding.bottomNav
+                snackbar.show()
             }
             .setNegativeButton("No", null)
             .show()
