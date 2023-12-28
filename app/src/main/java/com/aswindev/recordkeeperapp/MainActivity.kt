@@ -16,8 +16,13 @@ import com.aswindev.recordkeeperapp.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 
+const val RUNNING = "running"
+const val CYCLING = "cycling"
+const val ALL = "all"
+
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +43,17 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val menuClickHandled = when (item.itemId) {
             R.id.reset_running -> {
-                showConfirmationDialog("running")
+                showConfirmationDialog(RUNNING)
                 true
             }
 
             R.id.reset_cycling -> {
-                showConfirmationDialog("cycling")
+                showConfirmationDialog(CYCLING)
                 true
             }
 
             R.id.reset_all -> {
-                showConfirmationDialog("all")
+                showConfirmationDialog(ALL)
                 true
             }
 
@@ -66,9 +71,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             .setMessage("Are you sure you want to clear $selection records?")
             .setPositiveButton("Yes") { _, _ ->
                 when (selection) {
-                    "all" -> {
-                        getSharedPreferences("running", MODE_PRIVATE).edit { clear() }
-                        getSharedPreferences("cycling", MODE_PRIVATE).edit { clear() }
+                    ALL -> {
+                        getSharedPreferences(RUNNING, MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(CYCLING, MODE_PRIVATE).edit { clear() }
                     }
                     else -> getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }
                 }

@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.aswindev.recordkeeperapp.RUNNING
 import com.aswindev.recordkeeperapp.databinding.FragmentRunningBinding
 import com.aswindev.recordkeeperapp.editrecord.EditRecordActivity
+import com.aswindev.recordkeeperapp.editrecord.INTENT_EXTRA_SCREEN_DATA
 
 class RunningFragment : Fragment() {
     private lateinit var binding: FragmentRunningBinding
@@ -45,7 +47,7 @@ class RunningFragment : Fragment() {
 
     fun displayRecords() {
         val runningPreferences =
-            requireContext().getSharedPreferences("running", Context.MODE_PRIVATE)
+            requireContext().getSharedPreferences(RUNNING, Context.MODE_PRIVATE)
 
         binding.textView5kmValue.text = runningPreferences.getString("5km record", null)
         binding.textView5kmDate.text = runningPreferences.getString("5km date", null)
@@ -62,9 +64,9 @@ class RunningFragment : Fragment() {
     private fun launchRunningRecordScreen(distance: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
         intent.putExtra(
-            "data", EditRecordActivity.ScreenData(
+            INTENT_EXTRA_SCREEN_DATA, EditRecordActivity.ScreenData(
                 distance,
-                "running", "Time"
+                RUNNING, "Time"
             )
         )
         startActivity(intent)
