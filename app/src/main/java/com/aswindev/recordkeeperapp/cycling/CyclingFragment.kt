@@ -53,7 +53,7 @@ class CyclingFragment : Fragment() {
         }
     }
 
-    private fun displayRecords() {
+    fun displayRecords() {
         val cyclingPreferences =
             requireContext().getSharedPreferences("cycling", Context.MODE_PRIVATE)
 

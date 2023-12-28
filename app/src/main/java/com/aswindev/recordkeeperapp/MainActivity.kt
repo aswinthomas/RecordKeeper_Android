@@ -1,5 +1,6 @@
 package com.aswindev.recordkeeperapp
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.fragment.app.commit
 import com.aswindev.recordkeeperapp.cycling.CyclingFragment
 import com.aswindev.recordkeeperapp.databinding.ActivityMainBinding
@@ -32,27 +34,61 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.reset_running -> {
-            Toast.makeText(this, "Clicked the Reset Running", Toast.LENGTH_LONG).show()
-            true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val menuClickHandled = when (item.itemId) {
+            R.id.reset_running -> {
+                showConfirmationDialog("running")
+                true
+            }
+
+            R.id.reset_cycling -> {
+                showConfirmationDialog("cycling")
+                true
+            }
+
+            R.id.reset_all -> {
+                showConfirmationDialog("all")
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
         }
 
-        R.id.reset_cycling -> {
-            Toast.makeText(this, "Clicked the Reset Cycling", Toast.LENGTH_LONG).show()
-            true
-        }
-
-        R.id.reset_all -> {
-            Toast.makeText(this, "Clicked the Reset All", Toast.LENGTH_LONG).show()
-            true
-        }
-
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-
+        return menuClickHandled
     }
+
+    private fun showConfirmationDialog(selection: String) {
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("Reset $selection Records")
+            .setMessage("Are you sure you want to clear $selection records?")
+            .setPositiveButton("Yes") { _, _ ->
+                when (selection) {
+                    "all" -> {
+                        getSharedPreferences("running", MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences("cycling", MODE_PRIVATE).edit { clear() }
+                    }
+                    else -> getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }
+                }
+            }
+            .setNegativeButton("No", null)
+            .show()
+
+        dialog.setOnDismissListener {
+            when (binding.bottomNav.selectedItemId) {
+                R.id.nav_running -> {
+                    val fragment = supportFragmentManager.findFragmentById(R.id.frame_content) as? RunningFragment
+                    fragment?.displayRecords()
+                }
+                R.id.nav_cycling -> {
+                    val fragment = supportFragmentManager.findFragmentById(R.id.frame_content) as? CyclingFragment
+                    fragment?.displayRecords()
+                }
+            }
+        }
+    }
+
 
     private fun setupActionBar() {
         setSupportActionBar(binding.mainToolbarRunning)

@@ -2,7 +2,8 @@
 
 This App shows the following concepts:
 
-- App and Menu Toolbar
+- App Toolbar
+- Options Menu
 - Activities
 - Fragments
 - Bottom Navigation
@@ -19,5 +20,7 @@ This App shows the following concepts:
 <p float="left">
   <img src="climb.png" width="270" />
   <img src="reset.png" width="270" /> 
-  <img src="exit.png" width="270" />
+  <img src="clearall.png" width="270" />
 </p>
+
+<img src="exit.png" width="270" />

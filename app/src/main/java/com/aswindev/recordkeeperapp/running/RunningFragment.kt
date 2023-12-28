@@ -27,6 +27,10 @@ class RunningFragment : Fragment() {
         setupClickListeners()
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
+
     override fun onResume() {
         super.onResume()
         displayRecords()
@@ -39,7 +43,7 @@ class RunningFragment : Fragment() {
         binding.containerMarathon.setOnClickListener { launchRunningRecordScreen("Marathon") }
     }
 
-    private fun displayRecords() {
+    fun displayRecords() {
         val runningPreferences =
             requireContext().getSharedPreferences("running", Context.MODE_PRIVATE)
 
