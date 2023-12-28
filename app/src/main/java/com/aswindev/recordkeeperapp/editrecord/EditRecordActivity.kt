@@ -23,6 +23,10 @@ fun <T : Serializable> Intent.intentSerializable(key: String, clazz: Class<T>): 
 }
 
 class EditRecordActivity : AppCompatActivity() {
+    companion object {
+        const val RECORD_STR = "record"
+        const val DATE_STR = "date"
+    }
     private lateinit var binding: ActivityEditRecordBinding
     private val screenData: ScreenData by lazy {
         intent.intentSerializable(INTENT_EXTRA_SCREEN_DATA, ScreenData::class.java) as ScreenData
@@ -31,18 +35,18 @@ class EditRecordActivity : AppCompatActivity() {
         getSharedPreferences(screenData.sharedPreferencesName, Context.MODE_PRIVATE)
     }
 
-    private var backCallback = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() {
-            finish()
-        }
-    }
+//    private var backCallback = object : OnBackPressedCallback(true) {
+//        override fun handleOnBackPressed() {
+//            finish()
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditRecordBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupActionBar()
-        setupBackButtonCallback()
+        //setupBackButtonCallback()
         displayRecord()
         setupButtonListeners()
         // binding.textview.text = savedInstanceState?.getString("savedMessage")
@@ -58,23 +62,25 @@ class EditRecordActivity : AppCompatActivity() {
     }
 
     private fun setupBackButtonCallback() {
-        onBackPressedDispatcher.addCallback(this, backCallback)
+        //onBackPressedDispatcher.addCallback(this, backCallback)
     }
 
     private fun displayRecord() {
         binding.textInputRecord.hint = screenData.recordFieldHint
-        binding.editTextRecord.setText(recordPreferences.getString("${screenData.record} record", null))
-        binding.editTextDate.setText(recordPreferences.getString("${screenData.record} date", null))
+        binding.editTextRecord.setText(recordPreferences.getString("${screenData.record} $RECORD_STR", null))
+        binding.editTextDate.setText(recordPreferences.getString("${screenData.record} $DATE_STR", null))
     }
 
     private fun setupButtonListeners() {
         binding.buttonSave.setOnClickListener {
             saveRecord()
-            backCallback.handleOnBackPressed()
+            finish()
+            //backCallback.handleOnBackPressed()
         }
         binding.buttonDelete.setOnClickListener {
             clearRecord()
-            backCallback.handleOnBackPressed()
+            finish()
+            //backCallback.handleOnBackPressed()
         }
     }
 
@@ -83,26 +89,26 @@ class EditRecordActivity : AppCompatActivity() {
         val date = binding.editTextDate.text.toString()
         val runningPreferences = getSharedPreferences(screenData.sharedPreferencesName, Context.MODE_PRIVATE)
         runningPreferences.edit {
-            putString("${screenData.record} record", record)
-            putString("${screenData.record} date", date)
+            putString("${screenData.record} $RECORD_STR", record)
+            putString("${screenData.record} $DATE_STR", date)
         }
     }
 
     private fun clearRecord() {
         recordPreferences.edit {
-            remove("${screenData.record} record")
-            remove("${screenData.record} date")
+            remove("${screenData.record} $RECORD_STR")
+            remove("${screenData.record} $DATE_STR")
         }
     }
 
-    // Action bar Back button pressed callback
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            backCallback.handleOnBackPressed()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
+    // Action bar Back button pressed callback. Not needed once 'SingleTop' is set for Main.Activity
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        if (item.itemId == android.R.id.home) {
+//            backCallback.handleOnBackPressed()
+//            return true
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
 //    override fun onSaveInstanceState(outState: Bundle) {
 //        super.onSaveInstanceState(outState)

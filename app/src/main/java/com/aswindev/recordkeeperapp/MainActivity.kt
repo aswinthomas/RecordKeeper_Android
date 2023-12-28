@@ -16,13 +16,15 @@ import com.aswindev.recordkeeperapp.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 
-const val RUNNING = "running"
-const val CYCLING = "cycling"
-const val ALL = "all"
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
-    private lateinit var binding: ActivityMainBinding
+    companion object {
+        const val RUNNING_DISP_VAL = "Running"
+        const val CYCLING_DISP_VAL = "Cycling"
+        const val ALL_DISP_VAL = "All"
+    }
 
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,17 +45,17 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val menuClickHandled = when (item.itemId) {
             R.id.reset_running -> {
-                showConfirmationDialog(RUNNING)
+                showConfirmationDialog(RUNNING_DISP_VAL)
                 true
             }
 
             R.id.reset_cycling -> {
-                showConfirmationDialog(CYCLING)
+                showConfirmationDialog(CYCLING_DISP_VAL)
                 true
             }
 
             R.id.reset_all -> {
-                showConfirmationDialog(ALL)
+                showConfirmationDialog(ALL_DISP_VAL)
                 true
             }
 
@@ -71,13 +73,15 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             .setMessage("Are you sure you want to clear $selection records?")
             .setPositiveButton("Yes") { _, _ ->
                 when (selection) {
-                    ALL -> {
-                        getSharedPreferences(RUNNING, MODE_PRIVATE).edit { clear() }
-                        getSharedPreferences(CYCLING, MODE_PRIVATE).edit { clear() }
+                    ALL_DISP_VAL -> {
+                        getSharedPreferences(RunningFragment.FILENAME, MODE_PRIVATE).edit { clear() }
+                        getSharedPreferences(CyclingFragment.FILENAME, MODE_PRIVATE).edit { clear() }
                     }
-                    else -> getSharedPreferences(selection, MODE_PRIVATE).edit { clear() }
+                    RUNNING_DISP_VAL -> getSharedPreferences(RunningFragment.FILENAME, MODE_PRIVATE).edit { clear() }
+                    CYCLING_DISP_VAL -> getSharedPreferences(CyclingFragment.FILENAME, MODE_PRIVATE).edit { clear() }
                 }
-                val snackbar = Snackbar.make(binding.frameContent, "Records cleared successfully!",Snackbar.LENGTH_LONG)
+                val snackbar =
+                    Snackbar.make(binding.frameContent, "Records cleared successfully!", Snackbar.LENGTH_LONG)
                 snackbar.anchorView = binding.bottomNav
                 snackbar.show()
             }
@@ -87,11 +91,14 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         dialog.setOnDismissListener {
             when (binding.bottomNav.selectedItemId) {
                 R.id.nav_running -> {
-                    val fragment = supportFragmentManager.findFragmentById(R.id.frame_content) as? RunningFragment
+                    val fragment =
+                        supportFragmentManager.findFragmentById(R.id.frame_content) as? RunningFragment
                     fragment?.displayRecords()
                 }
+
                 R.id.nav_cycling -> {
-                    val fragment = supportFragmentManager.findFragmentById(R.id.frame_content) as? CyclingFragment
+                    val fragment =
+                        supportFragmentManager.findFragmentById(R.id.frame_content) as? CyclingFragment
                     fragment?.displayRecords()
                 }
             }
@@ -134,11 +141,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             .setPositiveButton("Yes") { _, _ -> finish() }
             .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
             .setNeutralButton("More Info") { _, _ ->
-                Toast.makeText(
-                    this,
-                    "Not much info here",
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(this, "Not much info here", Toast.LENGTH_LONG).show()
             }
             .show()
     }

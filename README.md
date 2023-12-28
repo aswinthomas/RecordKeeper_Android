@@ -2,15 +2,12 @@
 
 This App shows the following concepts:
 
-- App Toolbar
-- Options Menu
-- Activities
-- Fragments
+- App Toolbar & Options Menu
+- Activities & Fragments
 - Bottom Navigation
 - OnBackPressedDispatcher
-- AlertDialog
+- AlertDialog & Snackbar
 - SharedPreferences
-- Snackbar
 
 <p float="left">
   <img src="run.png" width="270" />
