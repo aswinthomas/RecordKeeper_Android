@@ -28,6 +28,7 @@ This App shows the following concepts:
 </p>
 
 <p float="left">
-  <img src="snackbar.png" width="270" />
-  <img src="exit.png" width="270" />
+    <img src="snackbar.png" width="270" />
+    <img src="exit.png" width="270" />
+    <img src="icon.png" width="270" />
 </p>
