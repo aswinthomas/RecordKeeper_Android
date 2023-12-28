@@ -1,7 +1,9 @@
 package com.aswindev.recordkeeperapp.editrecord
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
@@ -10,10 +12,18 @@ import androidx.core.content.edit
 import com.aswindev.recordkeeperapp.databinding.ActivityEditRecordBinding
 import java.io.Serializable
 
+fun <T : Serializable> Intent.intentSerializable(key: String, clazz: Class<T>): T? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        this.getSerializableExtra(key, clazz)
+    } else {
+        this.getSerializableExtra(key) as T?
+    }
+}
+
 class EditRecordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditRecordBinding
     private val screenData: ScreenData by lazy {
-        intent.getSerializableExtra("data") as ScreenData
+        intent.intentSerializable("data", ScreenData::class.java) as ScreenData
     }
     private val recordPreferences: SharedPreferences by lazy {
         getSharedPreferences(screenData.sharedPreferencesName, Context.MODE_PRIVATE)
@@ -69,7 +79,7 @@ class EditRecordActivity : AppCompatActivity() {
     private fun saveRecord() {
         val record = binding.editTextRecord.text.toString()
         val date = binding.editTextDate.text.toString()
-        val runningPreferences = getSharedPreferences("running", Context.MODE_PRIVATE)
+        val runningPreferences = getSharedPreferences(screenData.sharedPreferencesName, Context.MODE_PRIVATE)
         runningPreferences.edit {
             putString("${screenData.record} record", record)
             putString("${screenData.record} date", date)

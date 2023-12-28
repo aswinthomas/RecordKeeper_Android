@@ -54,21 +54,21 @@ class CyclingFragment : Fragment() {
     }
 
     private fun displayRecords() {
-        val runningPreferences =
-            requireContext().getSharedPreferences("running", Context.MODE_PRIVATE)
+        val cyclingPreferences =
+            requireContext().getSharedPreferences("cycling", Context.MODE_PRIVATE)
 
         binding.textViewLongestRideValue.text =
-            runningPreferences.getString("Longest Ride record", null)
+            cyclingPreferences.getString("Longest Ride record", null)
         binding.textViewLongestRideDate.text =
-            runningPreferences.getString("Longest Ride date", null)
+            cyclingPreferences.getString("Longest Ride date", null)
         binding.textViewBiggestClimbValue.text =
-            runningPreferences.getString("Biggest Climb record", null)
+            cyclingPreferences.getString("Biggest Climb record", null)
         binding.textViewBiggestClimbDate.text =
-            runningPreferences.getString("Biggest Climb date", null)
+            cyclingPreferences.getString("Biggest Climb date", null)
         binding.textViewBestAvgSpeedValue.text =
-            runningPreferences.getString("Best Average Speed record", null)
+            cyclingPreferences.getString("Best Average Speed record", null)
         binding.textViewBestAvgSpeedDate.text =
-            runningPreferences.getString("Best Average Speed date", null)
+            cyclingPreferences.getString("Best Average Speed date", null)
     }
 
     private fun launchCyclingRecordScreen(record: String, recordFieldHint: String) {
