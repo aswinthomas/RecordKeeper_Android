@@ -25,7 +25,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frame_content"
-        android:name="com.aswindev.recordkeeperapp.RunningFragment"
+        android:name="com.aswindev.recordkeeperapp.running.RunningFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"

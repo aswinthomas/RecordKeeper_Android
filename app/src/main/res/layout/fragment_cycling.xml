@@ -80,6 +80,7 @@
                     tools:text="22:04" />
 
                 <TextView
+                    android:id="@+id/text_view_longest_ride_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -127,6 +128,7 @@
                     tools:text="22:04" />
 
                 <TextView
+                    android:id="@+id/text_view_biggest_climb_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -174,6 +176,7 @@
                     tools:text="22:04" />
 
                 <TextView
+                    android:id="@+id/text_view_best_avg_speed_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"

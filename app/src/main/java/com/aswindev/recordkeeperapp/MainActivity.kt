@@ -1,6 +1,5 @@
 package com.aswindev.recordkeeperapp
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,7 +8,9 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
+import com.aswindev.recordkeeperapp.cycling.CyclingFragment
 import com.aswindev.recordkeeperapp.databinding.ActivityMainBinding
+import com.aswindev.recordkeeperapp.running.RunningFragment
 import com.google.android.material.navigation.NavigationBarView
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {

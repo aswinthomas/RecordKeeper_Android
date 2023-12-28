@@ -8,6 +8,7 @@ This App shows the following concepts:
 - Bottom Navigation
 - OnBackPressedDispatcher
 - AlertDialog
+- SharedPreferences
 
 <p float="left">
   <img src="run.png" width="270" />
